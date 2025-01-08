@@ -25,13 +25,11 @@ const CreatePost = () => {
     const file = e.target.files[0];
 
     if (file) {
-      if (file.type.startsWith("image")) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          setImg(reader.result);
-        };
-        reader.readAsDataURL(file);
-      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImg(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -73,7 +71,13 @@ const CreatePost = () => {
             />
             <BsEmojiSmileFill className="fill-primary w-5 h-5 cursor-pointer" />
           </div>
-          <input type="file" hidden ref={imgRef} onChange={handleImgChange} />
+          <input
+            type="file"
+            accept="image/*"
+            hidden
+            ref={imgRef}
+            onChange={handleImgChange}
+          />
           <button className="btn btn-primary rounded-full btn-sm text-white px-4">
             {isPending ? "Posting..." : "Post"}
           </button>
