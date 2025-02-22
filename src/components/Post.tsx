@@ -38,7 +38,7 @@ const Post = () => {
             alias!
           </p>
           <Image
-            className="mt-2"
+            className="mt-2 rounded-2xl"
             path="general/post.jpeg"
             alt=""
             w={600}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Feed from "@/components/Feed";
+import Share from "@/components/Share";
 
 const Homepage = () => {
   return (
@@ -15,6 +16,7 @@ const Homepage = () => {
           Following
         </Link>
       </div>
+      <Share />
       <Feed />
     </div>
   );
