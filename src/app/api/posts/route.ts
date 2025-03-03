@@ -1,8 +1,11 @@
 import { prisma } from "@/prisma";
-import Post from "./Post";
 import { auth } from "@clerk/nextjs/server";
+import { NextRequest } from "next/server";
 
-const Feed = async ({ userProfileId }: { userProfileId?: string }) => {
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const userProfileId = searchParams.get("user");
+
   const { userId } = await auth();
 
   if (!userId) return;
@@ -25,19 +28,5 @@ const Feed = async ({ userProfileId }: { userProfileId?: string }) => {
       };
 
   const posts = await prisma.post.findMany({ where: whereCondition });
-  console.log(posts);
-
-  return (
-    <div>
-      {posts.map((post) => {
-        return (
-          <div key={post.id}>
-            <Post />
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
-export default Feed;
+  return Response.json(posts);
+}
